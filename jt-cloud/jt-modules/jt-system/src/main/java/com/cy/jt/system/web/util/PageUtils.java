@@ -23,7 +23,6 @@ public class PageUtils {
                pageSizeStr="3";
          Integer pageCurrent=Integer.parseInt(pageCurrentStr);
          Integer pageSize=Integer.parseInt(pageSizeStr);
-
          return PageHelper.startPage(pageCurrent,pageSize);
      }
 }

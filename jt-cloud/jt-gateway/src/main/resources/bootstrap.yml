@@ -1,0 +1,24 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: jt-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+        file-extension: yml
+    gateway:
+      discovery:
+        locator:
+          enabled: true #启动服务发现机制(基于serviceId获取服务实例)
+      routes:
+        - id: router01
+          uri: lb://jt-auth
+          predicates:
+            - Path=/auth/user/**
+            - Method=Post
+          filters:
+            - StripPrefix=1
