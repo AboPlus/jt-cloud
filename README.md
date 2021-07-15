@@ -35,12 +35,13 @@ Jt-cloud-admin
 
 ## 微服务技术架构
 
-![image-20210715132635454](D:\AboStudy\typora笔记\6-msa\京淘权限管理子系统.assets\image-20210715132635454.png)
+![image](https://user-images.githubusercontent.com/70944495/125734879-67fccb30-0e3e-44dd-99cd-244c07494b90.png)
+
 
 ## 服务分层架构设计
 
 ​	系统分层设计是一种设计思想（分而治之），是让每层对象都有一个独立职责，再让多层对象协同（耦合）完成一个完整的功能。这样做可以更好提高系统可扩展性,但同时也会增加系统整体运维的难度。
 
-<img src="D:\AboStudy\typora笔记\6-msa\京淘权限管理子系统.assets\image-20210715132727283.png" alt="image-20210715132727283" style="zoom: 80%;" />
+![image](https://user-images.githubusercontent.com/70944495/125734891-92c50e96-a30d-4245-b2b0-3284e9acddcd.png)
 
 ​	其中，在上图中的箭头表示一种直接依赖关系，开放接口层可以依赖于 Web 层，也可以直接依赖于 Service 层，其它依此类推(具体每层要实现的逻辑可自行查阅阿里巴巴开发手册)。
