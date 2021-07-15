@@ -13,6 +13,7 @@ public class SysNoticeServiceImpl implements SysNoticeService {
     private SysNoticeDao sysNoticeDao;
     @Override
     public List<SysNotice> selectNotices(SysNotice notice) {
+        System.out.println("SysNoticeServiceImpl.selectNotices(SysNotice notice)");
         return sysNoticeDao.selectNotices(notice);
     }
     @Override

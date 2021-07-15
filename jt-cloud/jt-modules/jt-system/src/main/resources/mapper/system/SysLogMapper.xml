@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--系统启动时会解析此配置文件,将解析后的结果存储到
+Map<String,MappedStatement>,key为namespace+元素id,值为MappedStatement对象,
+此对象中存储着解析id对应的元素时,获取到的sql,参数,结果等信息,-->
+<mapper namespace="com.cy.jt.system.dao.SysLogDao">
+    <!--新增公告信息-->
+    <insert id="insertLog">
+        insert into sys_logs
+        (username,operation,method,params,
+         time,ip,status,error,createdTime)
+        values
+        (#{username},#{operation},#{method},#{params},
+         #{time},#{ip},#{status},#{error},#{createdTime})
+    </insert>
+
+    <sql id="selectColumns">
+        select id,username,ip,operation,method,
+               params,status,error,time,createdTime
+        from sys_logs
+    </sql>
+
+    <select id="selectLogs" resultType="com.cy.jt.system.domain.SysLog">
+        <include refid="selectColumns"/>
+        <where>
+            <if test="status!=null">
+                status=#{status}
+            </if>
+            <if test="operation!=null and operation!=''">
+                and operation like
+                concat("%",#{operation},"%")
+            </if>
+            <if test="username!=null and username!=''">
+                and  username like
+                concat("%",#{username},"%")
+            </if>
+        </where>
+        order by createdTime desc
+    </select>
+
+    <select id="selectById" resultType="com.cy.jt.system.domain.SysLog">
+        <include refid="selectColumns"/>
+        where id=#{id}
+    </select>
+
+    <delete id="deleteById"><!--(1,2,3,4,5)-->
+        <!--foreach 用于迭代一个数组或集合-->
+        delete from sys_logs
+        <where>
+            <if test="array!=null and array.length>0">
+                id in
+                <foreach collection="array" open="(" close=")" separator=","
+                         item="id">
+                    #{id}
+                </foreach>
+            </if>
+            or 1=2
+        </where>
+    </delete>
+
+
+
+
+</mapper>

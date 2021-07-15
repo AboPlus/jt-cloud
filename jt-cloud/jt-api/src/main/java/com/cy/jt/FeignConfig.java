@@ -16,7 +16,6 @@ public class FeignConfig {
     public RequestInterceptor requestInterceptor(){
         return new RequestInterceptor() {
             /**在此方法可以通过requestTemplate对象向新的请求中写数据*/
-            @Override
             public void apply(RequestTemplate requestTemplate) {
                 //1.获取原有请求中的数据
                 ServletRequestAttributes requestAttributes=
